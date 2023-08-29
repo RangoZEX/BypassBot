@@ -37,9 +37,11 @@ async def start_msg(c, m):
         rango = await m.reply("<b>Processing..</b> ⏳", quote=True)
     else:
         rango = m.message
+    
+    bot_start_time = convert_time(time() - BOT_START)  # Calculate the bot's start time
+    
     await rango.edit(
-         bot_start_time = convert_time(time() - BOT_START),
-         text = START_TEXT.format(mention=mention, bot_start_time=bot_start_time),
+         text=START_TEXT.format(mention=mention, bot_start_time=bot_start_time),  # Use bot_start_time here
          reply_markup=InlineKeyboardMarkup(
              [
                  [
@@ -51,7 +53,8 @@ async def start_msg(c, m):
              ]
          ),
          disable_web_page_preview=True,
-    ) 
+    )
+ 
  
 
 ########## Added Close button ✅ #######
