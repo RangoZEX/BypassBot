@@ -19,12 +19,12 @@ from FZBypass.core.exceptions import DDLException
 
 START_TEXT = """Hey {mention},
  
-<b>★ This Bypasss Bot</b>
+**★ This Bypasss Bot**
  
- ✳️ which can Bypass Various Shortener Links, Scrape links, and more.
+__✳️ Which can Bypass Various Shortener Links, Scrape links, and more.__
  
  
- <b>Bot Started {bot_start_time} ago...</b>
+⌛ **BOT UP-TIME**:  `{bot_start_time}`
  """
 
 
