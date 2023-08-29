@@ -36,7 +36,7 @@ async def start_msg(client, message):
 async def bypass_check(client, message):
     uid = message.from_user.id
     if uid not in Config.AUTH_CHATS:
-        return await message.reply("**Unauthorised user! 🔕\n\nPlz contact admin for access me**", quote=True)
+        return await message.reply("Unauthorised user! 🔕\n\nPlz contact admin for access me", quote=True)
  
     if (reply_to := message.reply_to_message) and (reply_to.text is not None or reply_to.caption is not None):
         txt = reply_to.text or reply_to.caption
