@@ -1,29 +1,29 @@
 from re import match
 from traceback import format_exc
 from urllib.parse import urlparse
-
+ 
 from FZBypass import LOGGER
 from FZBypass.core.bypass_dlinks import *
 from FZBypass.core.bypass_ddl import *
 from FZBypass.core.bypass_scrape import *
 from FZBypass.core.exceptions import DDLException
-
+ 
 fmed_list = ['fembed.net', 'fembed.com', 'femax20.com', 'fcdn.stream', 'feurl.com', 'layarkacaxxi.icu',
              'naniplay.nanime.in', 'naniplay.nanime.biz', 'naniplay.com', 'mm9842.com']
-
+ 
 anonSites = ['hotfile.io', 'bayfiles.com', 'megaupload.nz', 'letsupload.cc',
             'filechan.org', 'myfile.is', 'vshare.is', 'rapidshare.nu', 'lolabits.se',
             'openload.cc', 'share-online.is', 'upvid.cc']
-
+ 
 def is_share_link(url):
     return bool(match(r'https?:\/\/.+\.(gdtot|gdflix)\.\S+|https?:\/\/(gdflix|filepress|filebee|appdrive)\.\S+', url))
-
+ 
 def is_excep_link(url):
     return bool(match(r'https?:\/\/.+\.(gdtot|gdflix|sharespark)\.\S+|https?:\/\/(hubdrive|skymovieshd|toonworld4all|kayoanime|cinevood|gdflix|filepress|filebee|appdrive)\.\S+', url))
-
+ 
 async def direct_link_checker(link):
     domain = urlparse(link).hostname
-
+ 
     # DDL Links
     if bool(match(r"https?:\/\/(yadi|disk.yandex)\.\S+", link)):
         return await yandex_disk(link)
@@ -37,7 +37,7 @@ async def direct_link_checker(link):
         return await anonsites(link)
     elif any(x in domain for x in ['terabox', 'nephobox', '4funbox', 'mirrobox', 'momerybox', 'teraboxapp']):
         return await terabox(link)
-
+ 
     elif bool(match(r"https?:\/\/(gyanilinks|gtlinks)\.\S+", link)):
         return await gyanilinks(link)
     elif bool(match(r"https?:\/\/.+\.tnshort\.\S+", link)):
@@ -176,7 +176,12 @@ async def direct_link_checker(link):
     
     # DL Links
     elif bool(match(r"https?:\/\/hubdrive\.\S+", link)):
-        return await hubdrive(link)
+        return await drivescript(link, Config.HUBDRIVE_CRYPT, "HubDrive")
+    elif bool(match(r"https?:\/\/katdrive\.\S+", link)):
+        return await drivescript(link, Config.KATDRIVE_CRYPT, "KatDrive")
+    elif bool(match(r"https?:\/\/drivefire\.\S+", link)):
+        return await drivescript(link, Config.DRIVEFIRE_CRYPT, "DriveFire")
+    
     elif is_share_link(link):
         if 'gdtot' in domain:
             return await gdtot(link)
@@ -188,3 +193,4 @@ async def direct_link_checker(link):
             return await sharer_scraper(link)
     else:
         raise DDLException(f'<i>No Bypass Function Found for your Link :</i> <code>{link}</code>')
+      
