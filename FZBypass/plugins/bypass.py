@@ -67,61 +67,61 @@ async def close(c, m):
     await m.message.reply_to_message.delete() 
 
 
-# @Bypass.on_message(command(['bypass', 'bp']) & chat_and_topics)
-# async def bypass_check(client, message):
-#     uid = message.from_user.id
-#     if (reply_to := message.reply_to_message) and (reply_to.text is not None or reply_to.caption is not None):
-#         txt = reply_to.text or reply_to.caption
-#         entities = reply_to.entities or reply_to.caption_entities
-#     elif len(message.command) > 1:
-#         txt = message.text
-#         entities = message.entities
-#     else:
-#         return await message.reply('<i>No Link Provided! 🙂</i>', quote=True)
-    
-#     wait_msg = await message.reply("<i>Bypassing...</i>", quote=True)
-#     start = time()
- 
-#     link, tlinks, no = '', [], 0
-#     atasks = []
-#     for enty in entities:
-#         if enty.type == MessageEntityType.URL:
-#             link = txt[enty.offset:(enty.offset+enty.length)]
-#         elif enty.type == MessageEntityType.TEXT_LINK:
-#             link = enty.url
-            
-#         if link:
-#             no += 1
-#             tlinks.append(link)
-#             atasks.append(create_task(direct_link_checker(link)))
-#             link = ''
- 
-#     completed_tasks = await gather(*atasks, return_exceptions=True)
-    
-#     parse_data = []
-URL_REGEX = r"https?://\S+"
-
-@Bypass.on_message(filters.regex(URL_REGEX))
-async def bypass_links(client, message):
+@Bypass.on_message(command(['bypass', 'bp']) & chat_and_topics)
+async def bypass_check(client, message):
     uid = message.from_user.id
-
-    txt = message.text
-    entities = message.entities
-
+    if (reply_to := message.reply_to_message) and (reply_to.text is not None or reply_to.caption is not None):
+        txt = reply_to.text or reply_to.caption
+        entities = reply_to.entities or reply_to.caption_entities
+    elif len(message.command) > 1:
+        txt = message.text
+        entities = message.entities
+    else:
+        return await message.reply('<i>No Link Provided! 🙂</i>', quote=True)
+    
     wait_msg = await message.reply("<i>Bypassing...</i>", quote=True)
     start = time()
-
-    tlinks, no = [], 0
+ 
+    link, tlinks, no = '', [], 0
     atasks = []
-
     for enty in entities:
         if enty.type == MessageEntityType.URL:
-            link = txt[enty.offset:(enty.offset + enty.length)]
+            link = txt[enty.offset:(enty.offset+enty.length)]
+        elif enty.type == MessageEntityType.TEXT_LINK:
+            link = enty.url
+            
+        if link:
             no += 1
             tlinks.append(link)
             atasks.append(create_task(direct_link_checker(link)))
-
+            link = ''
+ 
     completed_tasks = await gather(*atasks, return_exceptions=True)
+    
+# #     parse_data = []
+# URL_REGEX = r"https?://\S+"
+
+# @Bypass.on_message(filters.regex(URL_REGEX))
+# async def bypass_links(client, message):
+#     uid = message.from_user.id
+
+#     txt = message.text
+#     entities = message.entities
+
+#     wait_msg = await message.reply("<i>Bypassing...</i>", quote=True)
+#     start = time()
+
+#     tlinks, no = [], 0
+#     atasks = []
+
+#     for enty in entities:
+#         if enty.type == MessageEntityType.URL:
+#             link = txt[enty.offset:(enty.offset + enty.length)]
+#             no += 1
+#             tlinks.append(link)
+#             atasks.append(create_task(direct_link_checker(link)))
+
+#     completed_tasks = await gather(*atasks, return_exceptions=True)
 
     parse_data = [] 
     for result, link in zip(completed_tasks, tlinks):
