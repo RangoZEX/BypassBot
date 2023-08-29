@@ -41,7 +41,7 @@ async def start_msg(c, m):
         rango = m.message
         
     await rango.edit(
-         text=START_TEXT.format(mu=mu, convert_time(time() - BOT_START)),
+         text=START_TEXT.format(mu=mu, bot_start_time=convert_time(time() - BOT_START)),
          reply_markup=InlineKeyboardMarkup(
              [
                  [
