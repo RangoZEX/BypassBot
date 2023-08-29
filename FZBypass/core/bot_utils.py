@@ -18,13 +18,18 @@ chat_and_topics = create(auth_topic)
  
 def convert_time(seconds):
     periods = [('d', 86400), ('h', 3600), ('m', 60), ('s', 1)]
+    period_names = {'d': 'Days', 'h': 'Hrs', 'm': 'Min', 's': 'Sec'}
     result = ''
+    
     for period_name, period_seconds in periods:
         if seconds >= period_seconds:
             period_value, seconds = divmod(seconds, period_seconds)
-            result += f'{int(period_value)} {period_name}'
-            if period_name != 's':  # Add space only if the unit is not 's' (seconds)
+            result += f'{int(period_value)} {period_names[period_name]}'
+            
+            if period_name != 's':  # Add space only if the unit is not 'seconds'
                 result += ' '
+    
     if result == '':
-        return '0 Sec'
+        return '0 seconds'
+    
     return result
