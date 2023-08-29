@@ -26,10 +26,10 @@ async def sharespark(url: str) -> str:
                 if match(r'https?://.+\.gdtot\.\S+', ns):
                     soup = BeautifulSoup(cget("GET", ns).text, "html.parser")
                     parse_data = (soup.select('meta[property^="og:description"]')[0]['content']).replace('Download ' , '').rsplit('-', maxsplit=1)
-                    gd_txt += f"┎ <b>Name :</b> {parse_data[0]}\n┠ <b>Size :</b> {parse_data[-1]}\n┃\n┖ <b>GDTot :</b> {ns}\n\n"
+                    gd_txt += f"<b>📁 NAME :</b> {parse_data[0]}\n<b>💽 SIZE:</b> {parse_data[-1]}\n<b>🔗 GDTot :</b> {ns}\n\n"
                 elif match(r'https?://pastetot\.\S+', ns):
                     nxt = sub(r'\(|\)|(https?://pastetot\.\S+)', '', next_s) 
-                    gd_txt += f"\n<b>{nxt}</b>\n┖ {ns}\n"
+                    gd_txt += f"\n<b>{nxt}</b>\n{ns}\n"
         if len(gd_txt) > 4000:
             return gd_txt # Broken Function
     if gd_txt != "": 
@@ -62,9 +62,9 @@ async def cinevood(url: str) -> str:
     for n, (t, gt, gf) in enumerate(zip(titles, gtlinks, gflinks), start=1):
         prsd += f'''
         
-{n}. <i><b>{t}</b></i>
+{n}. <b>{t}</b>
 ┃ 
-┖ <a href='{gt["href"]}'><b>GDToT Link</b></a> | <a href='{gf["href"]}'><b>GDFlix Link</b></a>'''
+┖ <a href='{gt["href"]}'><b>GDTot LINK 🔗</b></a> | <a href='{gf["href"]}'><b>GDFlix Link</b></a>'''
     return prsd
  
  
