@@ -1,180 +1,116 @@
 <div align="center">
-    <a href="https://github.com/weebzone/WZML">
-        <kbd>
-            <img width="250" src="https://graph.org/file/80f677693ae80cbd8707e.jpg" alt="FZ Bypass Logo">
-        </kbd>
-    </a>
 
-## ***FZBypassBot***
+[![](https://graph.org/file/97565a913c0133da1db6c.png)](#)
 
-<i>A **Elegant Fast Multi Threaded Bypass Telegram Bot** for Bigger Deeds like Mass Bypass. Try Now, and Feel the Speedy Work.</i>
-
-[**Demo Bot**](https://t.me/FZBypassBot) | [**Supported Sites**](#supported-sites) | [**Support Group**](https://t.me/FXTorrentz)
+[_CLI Deploy Guide_](#heroku-cli-guide)  |  [_Contact Me_](https://t.me/SilentDemonSD)
 
 </div>
 
 ---
 
-## ***Features***
-- _Fastest written in Async_
-- _Build with Simultaneously Bypass Method_
-- _Supported for Authorized Chats & Topics_
-- _Added Support for Inline Bypass ( Use anytime anywhere)_
-  > **Enable:** BotFather -> Bot Settings -> Inline Mode (Turn On)
+## ***HK-Loader & Updater***
+
+<div align="center">
+  
+A Simple **Shell Script** to make your Repo Deployable to Heroku.com (via CLI) & Auto Update and Fetch your Repo Updates / Commits on Restart with your Repository URL.
+
+</div>
 
 ---
 
-## ***Supported Sites***
-- All `Credits` to Respective Script Owner & Contributors
-- All these are Collected from the Internet / Web
+## ***Heroku CLI Guide***
 
-### ***Shorten Sites***
-| __Shortener Sites__ | __Status__ |
-|:--------------------:|:----------:|
-|`tinyfy.in`|✅️|
-|`xpshort.com` + `push.bdnewsx.com` + `techymozo.com`|✅️|
-|`gtlinks.me` + `gyanilinks.com`|✅️|
-|`droplink.co`|✅️|
-|`earn.moneykamalo.com`|✅️|
-|`adrinolinks.com`|❌️|
-|`krownlinks.me`|✅️|
-|`du-link.in` + `dulink.in`|✅️|
-|`onepagelink.in`|✅️|
-|`link.tnshort.net`|✅️|
-|`go.lolshort.tech`|✅️|
-|`indianshortner.in`|✅️|
-|`rslinks.net`|❌️|
-|`m.easysky.in`|❌️|
-|`linkbnao.com`|✅️|
-|`go.indiurl.in.net`|⚠️|
-|`go.earnl.xyz`|⚠️|
-|`linkvertise.com`|✅️|
-|`link.tnlink.in`|️✅️|
-|`link4earn.com` + `link4earn.in`|✅️|
-|`shortingly.com`|️✅️|️
-|`go.flashlink.in`|⚠️|
-|`short2url.in`|✅️|
-|`urlsopen.com`|⚠️|
-|`mdisk.pro`|✅️|
-|`ouo.io` + `ouo.press`|✅️|
-|`shareus.in` + `shareus.io` + `shrs.link`|️❌️|
-|`dropbox.in`|✅️|
-|`disk.yandex.ru` + `yandex.com`|✅️|
-|`try2link.com`|✅️|
-|`shrdsk.me`|✅️|
-|`linkpays.in`|✅️|
-|`pkin.me` + `go.paisakamalo.in`|✅️|
-|`sklinks.in` + `sklinks.tech`|✅️|
-|`link1s.com`|✅️|
-|`tulinks.one` + `go.tulinks.online` + `tulinks.online`|✅️|
-|`powerlinks.site`|✅️|
-|`link.vipurl.in` + `vipurl.in` + `count.vipurl.in`|✅️|
-|`v2links.com`|✅️|
-|`indyshare.net`|✅️|
-|`bit.ly` + `tinyurl.com` + `aylm.short.gy`|✅️|
-|`linkyearn.com`|✅️|
-|`earn4link.in`|✅️|
-|`linksly.co`|✅️|
-|`download.mdiskshortner.link`|✅️|
-|`shrdsk.me`|️❌️|
-|`mediafire.com`|✅️|
-|`terabox.*` + `terabox.*` + `nephobox.*` + `4funbox.*` + `mirrobox.*` + `momerybox.*` + `teraboxapp.*`|✅️|
-|`hotfile.io` + `bayfiles.com` + `megaupload.nz` + `letsupload.cc` + `filechan.org` + `myfile.is` + `vshare.is` + `rapidshare.nu` + `lolabits.se` + `openload.cc` + `share-online.is` + `upvid.cc`️|⚠️|
-|`rocklinks.net`|✅️|
-|`mplaylink.com`|✅️|
-|`shrinke.me`|✅️|
-|`urlspay.in`|✅️|
-|`short.tnvalue.in`|✅️|
-|`sxslink.com`|✅️|
-|`ziplinker.net`|✅️|
-|`moneycase.link`|✅️|
-|`urllinkshort.in`|✅️|
-|`dtglinks.in`|✅️|
-|`shrtco.de` + `9qr.de` + `shiny.link`|✅️|
-|`kpslink.in`|✅️|
-|`v2.kpslink.in`|✅️|
-|`tamizhmasters.com`|✅️|
-|`tglink.in`|✅️|
-|`pandaznetwork.com`|✅️|
-|`url4earn.in`|✅️|
-|`ez4short.com`|✅️|
-|`More Sites...Updating`|️♻️|
+**Step 1 :** Git clone this Repo and change directory
+> Make sure git is Installed in your system or quick run `apt-get install git pip curl -y`
 
-### ***Scrape Sites***
-| __Websites__ | __Status__ |
-|:--------------------:|:----------:|
-|`cinevood.*` **(Page)** |✅️|
-|`toonworld4all.*` **(Page + Episode)** |✅️|
-|`kayoanime.com` **(Page)**|✅️|
-|`skymovieshd.*`|✅️|
-|`ww1.sharespark.cfd`|✅️|
+```shell
+git clone https://github.com/SilentDemonSD/HK-Loader && cd HK-Loader
+```
 
-### ***GDrive Sites***
-| __Websites__ | __Status__ |
-|:--------------------:|:----------:|
-|`new9.gdtot.cfd`|✅️|
-|`filepress.space` + `filebee.*`|✅️|
-|`appdrive.club` **(File + Pack)**|✅️|
-|`gdflix.cc`**(File + Pack)**|✅️|
-|`hubdrive.co`|✅️|
+**Step 2 :** Now Install Heroku in your Sytem or checkout Official Heroku Deploy Docs, or Download via `apt-get` or `npm`
+> For Android : Use `termux` for CLI usage
+
+```shell
+curl https://cli-assets.heroku.com/install.sh | sh
+```
+
+**Step 3 :** Login into Heroku and Log In CLI via Browser 
+
+```shell
+heroku login
+```
+
+**Step 4 :** Create Heroku App and specify region with App Name
+
+```shell
+heroku create --region us APP_NAME
+```
+
+**Notes:**
+- `--region eu` for Europe Server and `--region us` for United States Server.
+- `APP_NAME` should be replaced with your unique app name _(Optional)_. If not given it generates a random name.
+- `--stack container` for setting stack to container for Dockerfile.
+- `--buildpack heroku/python` for using build slug for repo deploy and build.
+
+**Step 5 :** Set Local git remote for Heroku.
+
+```shell
+heroku git:remote -a APP_NAME
+```
+
+**Step 6 :** Setup Config Variables for the script to run.
+
+```shell
+heroku config:set REPO_URL=https://github.com/user/repo REPO_BRANCH=main START_CMD="python -m bot"
+```
+
+**Step 7 :** Now push to Heroku via git forcefully to build.
+
+```shell
+git push heroku main -f
+```
+
+**All Heroku CLI Commands :** [Click Here](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-config-set)
 
 ---
 
-## ***Deploy Guide***
-1. `Heroku` _(Recommended)_
-    - Use [HK-Loader](https://github.com/SilentDemonSD/HK-Loader) and Follow further Steps.
-    - Use Process Type `worker` to run without any Stop.
-    - **Variables Values:**
-      - `REPO_URL`: https://github.com/SilentDemonSD/FZBypassBot
-      - `REPO_BRANCH`: main
-      - `START_CMD`: bash start.sh
-2. `VPS`
-    - **Build And Run The Docker Image Using Official Docker Commands**
-        - _Clone the Repository_
-            ```
-            git clone https://github.com/SilentDemonSD/FZBypassBot && cd FZBypassBot
-            ```
-        - _Build Docker image:_
-            ```
-            docker build . -t fzbypass
-            ```
-        - _Run the image:_
-            ```
-            docker run fzbypass
-            ```
-        - _To stop the running image:_
-            - Check Running Containers
-                ```
-                docker ps
-                ```
-            - Get the ID and Stop the Container
-                ```
-                docker stop idxxxxx
-                ```
-    - _Add `sudo` at the Start of Each Command if your CLI is rooted_
-    - _Add all Config Data in `config.env`_
-    - _Update your Repo Directly, Make sure to fill Up `UPSTREAM_REPO` & `UPSTREAM_BRANCH`_
-        ```
-        docker restart idxxxxx
-        ```
+## Config SetUp
+- `REPO_URL` - Deploy Repository URL, add Private Token if Repo is Private
+- `REPO_BRANCH` - Repo Branch, you want to deploy with your REPO_URL.
+- `START_CMD` - Trigger Command for your Bot to Run.
+  > Examples : `python -m bot` ( `-m` is for inside Dir startup) or `python main.py` or `bash start.sh`
 
 ---
 
-## ***Config Setup***
-- `BOT_TOKEN`: Telegram Bot Token that you got from BotFather.
-- `OWNER_ID`: Telegram User ID (not username) of the Owner of the bot.
-- `API_ID`: This is to authenticate your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org.
-- `API_HASH`: This is to authenticate your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org.
-- `AUTH_CHATS`: Group ID (with Topic ID), Separated by space.
-  > **Format:** chat_id:topic_id chat_id chat_id:topic_id
-- `GDTOT_CRYPT`: GdToT Crypt (Optional). It works with & without Crypt!
-- `HUBDRIVE_CRYPT`: HubDrive Crypt, Get from Cookie Editor Extension.
-- `TERA_COOKIE`: Get the Terabox `ndus` Cookie from Cookie Editor Extension.
-- `UPSTREAM_REPO`: Put Upstream Repo to Update. Defaults to `https://github.com/SilentDemonSD/FZBypassBot`
-- `UPSTREAM_BRANCH`: Put Branch Name. Defaults to `main`
+## ***Important Notes:***
+- Repo made for Non-Docker Repos but can be customized for Docker Repos _(Read Ahead)_
+- If your Repo Uses additional Docker packages or Images, Add `Dockerfile` _(Must Remove Run cmd)_ here and add `heroku.yml` file with content as:
+  ```yml
+  build:
+    docker:
+      web: Dockerfile
+  run:
+    web: chmod +x hk_deploy.sh && ./hk_deploy.sh
+  ```
+  - Also Run a extra Command before Deploy or set stack at app creation.
+    ```shell
+    heroku stack:set container -a APP_NAME
+    ```
+    **Available Stacks :** `container` (Dockerfile), `heroku-22` (Default), `heroku-20` (python-3.8.16 Version Usage) and [More](https://devcenter.heroku.com/articles/stack#stack-support-details)
+- Default process type is `web`, If you use other types like `worker`.
+  - Replace `web` with `worker` from `heroku.yml` and `Procfile` files.
+  ```diff
+  build:
+    docker:
+  --    web: Dockerfile
+  ++    worker: Dockerfile
+  run:
+  --  web: chmod +x hk_deploy.sh && ./hk_deploy.sh
+  ++  worker: chmod +x hk_deploy.sh && ./hk_deploy.sh
+  ```
 
 ---
 
-## ***Credits***
-- `SilentDemonSD` (Developer)
-- `Link-Bypasser-Bot` (Many Scripts are Taken & Totally Modified)
+## ***References***
+- _Concept & Made by SilentDemonSD_
+- _Helped via git Docs & AriaAI_
