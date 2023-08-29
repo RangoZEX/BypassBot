@@ -50,12 +50,11 @@ async def filepress(url: str):
                 tg_link = 'Telegram Not Uploaded / Unavailable' if tg_id["statusText"] == "Ok" else tg_id["statusText"]
     except Exception as e:
         raise DDLException(f'<b>ERROR:</b> {e.__class__.__name__}')
-    return f'''┎ <b>Name :</b> <i>{name}</i>
-┠ <b>Size :</b> <i>{size}</i>
-┃
-┠ <b>Filepress Link :</b> {url}
-┠ <b>Direct Download :</b> {dl_link}
-┖ <b>Telegram Link :</b> {tg_link}'''
+    return f'''<b>📁 File Name:</b> <code>{name}</code>\n\n
+<b>💽 Size :</b> <code>{size}</code>
+<b>🔗 Filepress Link :</b> <code>{url}</code>\n
+<b>📩 <a href="{dl_link}">Direct Download Link</a></b>: <code>{dl_link}</code>
+<b>📺 Telegram Link :</b> {tg_link}'''
  
  
 async def gdtot(url):
