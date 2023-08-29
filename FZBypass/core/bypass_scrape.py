@@ -4,11 +4,11 @@ from requests import get as rget
 from cloudscraper import create_scraper
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup, NavigableString, Tag
-
+ 
 from FZBypass import Config, LOGGER
 from FZBypass.core.bypass_ddl import transcript
-
-
+ 
+ 
 async def sharespark(url: str) -> str:
     gd_txt = ""
     cget = create_scraper().request
@@ -34,21 +34,25 @@ async def sharespark(url: str) -> str:
             return gd_txt # Broken Function
     if gd_txt != "": 
         return gd_txt
-
-
+ 
+ 
 async def skymovieshd(url: str) -> str:
-    gd_txt = ""
-    soup = BeautifulSoup(rget(url, allow_redirects=False).text, 'html.parser') 
-    a = soup.select('a[href*="howblogs.xyz"]')
+    soup = BeautifulSoup(rget(url, allow_redirects=False).text, 'html.parser')
     t = soup.select('div[class^="Robiul"]')
-    gd_txt += f"<i>{t[-1].text.replace('Download ', '')}</i>\n\n<b>{a[0].text} :</b> \n"
-    nsoup = BeautifulSoup(rget(a[0]['href'], allow_redirects=False).text, 'html.parser') 
-    atag = nsoup.select('div[class="cotent-box"] > a[href]')
-    for no, link in enumerate(atag, start=1): 
-        gd_txt += f"{no}. {link['href']}\n"
+    gd_txt = f"<i>{t[-1].text.replace('Download ', '')}</i>"
+    _cache = []
+    for link in soup.select('a[href*="howblogs.xyz"]'):
+        if link in _cache:
+            continue
+        _cache.append(link)
+        gd_txt += f"\n\n<b>{link.text} :</b> \n"
+        nsoup = BeautifulSoup(rget(link['href'], allow_redirects=False).text, 'html.parser') 
+        atag = nsoup.select('div[class="cotent-box"] > a[href]')
+        for no, link in enumerate(atag, start=1): 
+            gd_txt += f"{no}. {link['href']}\n"
     return gd_txt
-
-
+ 
+ 
 async def cinevood(url: str) -> str:
     soup = BeautifulSoup(rget(url).text, 'html.parser')
     titles = soup.select('h6')
@@ -62,8 +66,8 @@ async def cinevood(url: str) -> str:
 ┃ 
 ┖ <a href='{gt["href"]}'><b>GDToT Link</b></a> | <a href='{gf["href"]}'><b>GDFlix Link</b></a>'''
     return prsd
-
-
+ 
+ 
 async def kayoanime(url: str) -> str:
     soup = BeautifulSoup(rget(url).text, 'html.parser')
     titles = soup.select('h6')
@@ -76,12 +80,12 @@ async def kayoanime(url: str) -> str:
             domain = urlparse(link).hostname
             gd_txt = "Mega" if "mega" in domain else "G Group" if "groups" in domain else "Direct Link"
         prsd += f'''
-
+ 
 {n}. <i><b>{gd.string}</b></i>
 ┗ <b>Links :</b> <a href='{link}'><b>{gd_txt}</b></a>'''
     return prsd
-
-
+ 
+ 
 async def toonworld4all(url: str):
     if "/redirect/main.php?url=" in url:
         return f'┎ <b>Source Link:</b> {url}\n┃\n┖ <b>Bypass Link:</b> {rget(url).url}'
@@ -104,7 +108,7 @@ async def toonworld4all(url: str):
     titles.pop(0)
     slicer, _ = divmod(len(links), len(titles))
     atasks = [create_task(transcript(rget(sl["href"]).url, "https://insurance.techymedies.com/", "https://highkeyfinance.com/", 5)) for sl in links]
-
+ 
     com_tasks = await gather(*atasks, return_exceptions=True)
     lstd = [com_tasks[i:i+slicer] for i in range(0, len(com_tasks), slicer)]
     
