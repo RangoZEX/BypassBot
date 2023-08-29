@@ -53,8 +53,9 @@ async def filepress(url: str):
     return f'''<b>📁 NAME:</b> <code>{name}</code>\n\n
 <b>💽 SIZE :</b> <code>{size}</code>\n
 <b>🔗 FILEPRESS LINK:</b> <code>{url}</code>\n
-<b>📩 <a href="{dl_link}">DOWNLOAD LINK</a></b>: <code>{dl_link}</code>\n
-<b>📺 TG FILE LINK :</b> {tg_link}'''
+<b>📩 <a href="{dl_link}">BYPASS LINK</a></b>:
+<b>♦️ COPY:</b> <code>{dl_link}</code>\n
+<b>📜 <a href="{tg_link}">GET TG FILES </a></b>:'''
  
  
 async def gdtot(url):
@@ -81,10 +82,11 @@ async def gdtot(url):
         raise DDLException('Drive Link not found, Try in your broswer! GDTOT_CRYPT not Provided!')
     soup = BeautifulSoup(cget('GET', url).content, "html.parser")
     parse_data = (soup.select('meta[property^="og:description"]')[0]['content']).replace('Download ' , '').rsplit('-', maxsplit=1)
-    return f'''<b>📁 File Name :</b> <code>{parse_data[0]}</code>\n\n
+    return f'''<b>📁 NAME :</b> <code>{parse_data[0]}</code>\n\n
 <b>💽 SIZE :</b> <code>{parse_data[-1]}</code>\n
 <b>🔗 <a href="{url}">GDTOT LINK </a></b>: <code>{url}</code>\n
-<b>📩 BYPASS LINK :</b> {d_link}'''
+<b>📩 <a href="{d_link}">BYPASS LINK :</a></b>
+<b>♦️ COPY: </b> <code>{d_link}</code>'''
  
  
 async def drivescript(url, crypt, dtype):
@@ -140,8 +142,9 @@ async def appflix(url):
         ss = soup.select("li[class^='list-group-item']")
         return f'''<b>📁 NAME:</b> <code>{ss[0].string.split(":")[1]}</code>\n\n
 <b>💽 SIZE:</b> <i>{ss[2].string.split(":")[1]}</i>
-<b>🔗 <a href="{url}">SOURCE LINK</a></b>: <code>{url}</code>\n
-<b>📩 BYPASS LINK :</b> {d_link}'''
+<b>🔗 <a href="{url}">APPFLIX LINK</a></b>: <code>{url}</code>\n
+<b>📩 <a href="{d_link}">BYPASS LINK</b>:
+<b>♦️ COPY:</b> <code>{d_link}</code>'''
     if "/pack/" in url:
         cget = create_scraper().request
         url = cget("GET", url).url
