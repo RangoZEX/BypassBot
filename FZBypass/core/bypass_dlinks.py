@@ -120,7 +120,8 @@ async def drivescript(url, crypt, dtype):
         parse_txt = f'''┎ <b>Name :</b> <i>{title}</i>
 ┠ <b>Size :</b> <i>{size}</i>
 ┃ 
-┠ <b>{dtype} Link :</b> {url}'''
+┠ <b>{dtype} Link :</b> {url}
+'''
         if dtype == "HubDrive":
             parse_txt += f'''┠ <b>Drive Link :</b> {gd_data[0]['href']}
 ┖ <b>Instant Link :</b> <a href="{gd_data[1]['href']}">Click Here</a>'''
@@ -205,4 +206,6 @@ async def sharer_scraper(url):
         return drive_link[0]
     else:
         raise DDLException('Drive Link not found, Try in your browser')
+ 
+ 
  
