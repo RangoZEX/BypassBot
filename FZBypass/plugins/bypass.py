@@ -16,14 +16,14 @@ from FZBypass.core.exceptions import DDLException
  
  
 
-START_TEXT = """Hey {},
+START_TEXT = """Hey {mu},
  
 <b>★ This Bypasss Bot</b>
  
  ✳️ which can Bypass Various Shortener Links, Scrape links, and more.
  
  
- <b>Bot Started {} ago...</b>
+ <b>Bot Started {bot_start_time} ago...</b>
  """
 
 
