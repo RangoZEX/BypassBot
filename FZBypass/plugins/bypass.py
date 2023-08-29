@@ -7,6 +7,7 @@ from pyrogram.filters import command, private, user
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultArticle, InputTextMessageContent
 from pyrogram.enums import MessageEntityType
 from pyrogram.errors import QueryIdInvalid
+from pyrogram import Client, filters
 
 from FZBypass import Config, Bypass, BOT_START, LOGGER
 from FZBypass.core.bypass_checker import direct_link_checker, is_excep_link
