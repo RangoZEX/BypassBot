@@ -16,9 +16,9 @@ from FZBypass.core.exceptions import DDLException
  
  
 
-START_TEXT = """**Hey {},**
+START_TEXT = """**Hey {mu},**
  
-**★ This Bypasss Bot**
+<b>★ This Bypasss Bot</b>
  
  ✳️ which can Bypass Various Shortener Links, Scrape links, and more.
  
@@ -32,6 +32,8 @@ START_TEXT = """**Hey {},**
 async def start_msg(c, m):
     last_name = f' {m.from_user.last_name}' if m.from_user.last_name else ''
     mention = f"[{m.from_user.first_name}{last_name}](tg://user?id={m.from_user.id})"
+    mu = f"[{mention}](tg://user?id={m.from_user.id})"
+
  
     if not getattr(m, 'data', None):
         rango = await m.reply("<b>Processing..</b> ⏳", quote=True)
