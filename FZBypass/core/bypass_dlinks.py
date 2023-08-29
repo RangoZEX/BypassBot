@@ -128,23 +128,32 @@ async def drivescript(url, crypt, dtype):
             parse_txt += f"<b>📩 BYPASS LINK:</b> {gd_data[0]['href']}"
         return parse_txt
     elif not dlink and not crypt:
-        raise DDLException(f'{dtype} Crypt Not Provided & {js_query["file"]}')
+        raise DDLException(f'{dtype} Crypt Not Provided')
     else:
         raise DDLException(f'{js_query["file"]}')
  
  
 async def appflix(url):
     async def appflix_single(url):
-        d_link = await sharer_scraper(url)
         cget = create_scraper().request
         url = cget("GET", url).url
-        soup = BeautifulSoup(cget('GET', url).content, "html.parser")
+        soup = BeautifulSoup(cget('GET', url, allow_redirects=False).text, "html.parser")
         ss = soup.select("li[class^='list-group-item']")
-        return f'''<b>📁 NAME:</b> <code>{ss[0].string.split(":")[1]}</code>\n\n
-<b>💽 SIZE:</b> <i>{ss[2].string.split(":")[1]}</i>
-<b>🔗 <a href="{url}">APPFLIX LINK</a></b>: <code>{url}</code>\n
-<b>📩 <a href="{d_link}">BYPASS LINK</b>:
-<b>♦️ COPY:</b> <code>{d_link}</code>'''
+        dbotv2 = dbot[0]['href'] if "gdflix" in url and (dbot := soup.select("a[href*='drivebot.lol']")) else None
+        try:
+            d_link = await sharer_scraper(url)
+        except Exception as e:
+            if not dbotv2:
+                raise e
+            else:
+                d_link = str(e)
+        parse_txt = f'''<b>📁 NAME:</b> <code>{ss[0].string.split(":")[1]}</code>\n\n
+<b>💽 SIZE:</b> <code>{ss[2].string.split(":")[1]}</code>\n
+<b>🔗 <a href="{url}">SOURCE LINK</a>:</b> <code>{url}</code>
+'''
+        if dbotv2:
+            parse_txt += f'<b>♦️ DRIVEBOT V2 :</b> <a href="{dbotv2}">Click Here</a>'
+        return parse_txt + f'<b>🔗 BYPASS LINK :</b> <code>{d_link}</code>'
     if "/pack/" in url:
         cget = create_scraper().request
         url = cget("GET", url).url
@@ -158,10 +167,9 @@ async def appflix(url):
                 body += "\n\n" + f"<b>Bypass Error:</b> {bp_link}"
             else:
                 body += "\n\n" + bp_link
-        return f'''<b>📁 NAME:</b> <code>{soup.title.string}</code>
-<b>♦️ SOURCE PACK:</b> <code>{url}{body}</code>'''
-    return await appflix_single(url)
- 
+        return f'''<b>📁 NAME :</b> <code>{soup.title.string}</code>\n\n
+<b>🔗 SOURCE PACK URL:</b> {url}{body}'''
+    return await appflix_single(url) 
  
 async def sharer_scraper(url):
     cget = create_scraper().request
