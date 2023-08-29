@@ -19,7 +19,7 @@ from FZBypass.core.exceptions import DDLException
 
 START_TEXT = """Hey {mention},
  
-**★ This Bypasss Bot**
+**★ This is Bypasss Bot**
  
 __✳️ Which can Bypass Various Shortener Links, Scrape links, and more.__
  
