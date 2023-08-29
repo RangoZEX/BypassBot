@@ -14,28 +14,50 @@ from FZBypass.core.bot_utils import chat_and_topics, convert_time
 from FZBypass.core.exceptions import DDLException
  
  
+
+START_TEXT = """**Hey {},**
+ 
+**★ This Bypasss Bot**
+ 
+ ✳️ which can Bypass Various Shortener Links, Scrape links, and more.
+
+ <i><b>Bot Started {convert_time(time() - BOT_START)} ago...</b></i>
+ """
+
+
+
 @Bypass.on_message(command('start'))
-async def start_msg(client, message):
-    await message.reply(f'''<b><i>FZ Bypass Bot!</i></b>
-    
-    <i>A Powerful Elegant Multi Threaded Bot written in Python... which can Bypass Various Shortener Links, Scrape links, and More ... </i>
-    
-    <i><b>Bot Started {convert_time(time() - BOT_START)} ago...</b></i>''', 
-        quote=True,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton('MASTER 👑', url='https://t.me/RangoZex'),
-                ],
-                [
-                    InlineKeyboardButton('Close ❌', callback_data='close')
-                ]
-            ]
-        ),
-        disable_web_page_preview=True,
+async def start_msg(c, m):
+    last_name = f' {m.from_user.last_name}' if m.from_user.last_name else ''
+    mention = f"[{m.from_user.first_name}{last_name}](tg://user?id={m.from_user.id})"
+    if not getattr(m, 'data', None):
+        rango = await m.reply("**__Processing..__** ⏳", quote=True)
+    else:
+        rango = m.message
+    await rango.edit(
+         text=START_TEXT.format(mention),
+         reply_markup=InlineKeyboardMarkup(
+             [
+                 [
+                     InlineKeyboardButton('MASTER 👑', url='https://t.me/RangoZex'),
+                 ],
+                 [
+                     InlineKeyboardButton('Close ❌', callback_data='close')
+                 ]
+             ]
+         ),
+         disable_web_page_preview=True,
     ) 
  
- 
+
+########## Added Close button ✅ #######
+@Bypass.on_callback_query(filters.regex('close$'))
+async def close(client, message):
+async def close(c, m):
+    await m.message.delete()
+    await m.message.reply_to_message.delete() 
+
+
 @Bypass.on_message(command(['bypass', 'bp']) & chat_and_topics)
 async def bypass_check(client, message):
     uid = message.from_user.id
