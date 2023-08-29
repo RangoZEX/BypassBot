@@ -2,6 +2,7 @@ from time import time
 from re import match
 from sys import executable
 from os import execl
+from pyrogram import enums
 from asyncio import create_task, gather, sleep as asleep, create_subprocess_exec
 from pyrogram.filters import command, private, user
 from pyrogram import Client, filters
@@ -54,6 +55,7 @@ async def start_msg(c, m):
              ]
          ),
          disable_web_page_preview=True,
+         parse_mode=enums.ParseMode.MARKDOWN
     )
  
  
