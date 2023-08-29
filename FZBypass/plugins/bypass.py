@@ -16,7 +16,7 @@ from FZBypass.core.exceptions import DDLException
  
  
 
-START_TEXT = """Hey {mu},
+START_TEXT = """Hey {mention},
  
 <b>★ This Bypasss Bot</b>
  
@@ -33,7 +33,6 @@ async def start_msg(c, m):
  ###### For mention user
     last_name = f' {m.from_user.last_name}' if m.from_user.last_name else ''
     mention = f"[{m.from_user.first_name}{last_name}](tg://user?id={m.from_user.id})"
-    mu = f"Hey {mention},"
 
     bot_start_time = convert_time(time() - BOT_START)
  
@@ -43,7 +42,7 @@ async def start_msg(c, m):
         rango = m.message
         
     await rango.edit(
-         text=START_TEXT.format(mu=mu, bot_start_time=bot_start_time),
+         text=START_TEXT.format(mention=mention, bot_start_time=bot_start_time),
          reply_markup=InlineKeyboardMarkup(
              [
                  [
