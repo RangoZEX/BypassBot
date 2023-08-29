@@ -52,7 +52,6 @@ async def start_msg(c, m):
 
 ########## Added Close button ✅ #######
 @Bypass.on_callback_query(filters.regex('close$'))
-async def close(client, message):
 async def close(c, m):
     await m.message.delete()
     await m.message.reply_to_message.delete() 
