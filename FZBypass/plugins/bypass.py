@@ -11,7 +11,7 @@ from pyrogram import Client, filters
 
 from FZBypass import Config, Bypass, BOT_START, LOGGER
 from FZBypass.core.bypass_checker import direct_link_checker, is_excep_link
-from FZBypass.core.bot_utils import chat_and_topics, convert_time
+from FZBypass.core.bot_utils import convert_time
 from FZBypass.core.exceptions import DDLException
 
 
