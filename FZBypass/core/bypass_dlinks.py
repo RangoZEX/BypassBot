@@ -8,17 +8,17 @@ from re import findall, match, search, sub
 from time import sleep
 from urllib.parse import parse_qs, quote, unquote, urlparse
 from uuid import uuid4
-
+ 
 from bs4 import BeautifulSoup
 from cloudscraper import create_scraper
 from lxml import etree
 from requests import Session
 from aiohttp import ClientSession 
-
+ 
 from FZBypass import LOGGER, Config
 from FZBypass.core.exceptions import DDLException
-
-
+ 
+ 
 async def filepress(url: str):
     cget = create_scraper().request
     try:
@@ -56,8 +56,8 @@ async def filepress(url: str):
 ┠ <b>Filepress Link :</b> {url}
 ┠ <b>Direct Download :</b> {dl_link}
 ┖ <b>Telegram Link :</b> {tg_link}'''
-
-
+ 
+ 
 async def gdtot(url):
     cget = create_scraper().request
     try:
@@ -87,35 +87,52 @@ async def gdtot(url):
 ┃ 
 ┠ <b>GDToT Link :</b> {url}
 ┖ <b>Drive Link :</b> {d_link}'''
-
-
-async def hubdrive(url):
-    if not Config.HUBDRIVE_CRYPT:
-        raise DDLException("HubDrive Crypt Not Provided !")
+ 
+ 
+async def drivescript(url, crypt, dtype):
     rs = Session()
-    rs.cookies.update({'crypt': Config.HUBDRIVE_CRYPT})
     resp = rs.get(url)
     title = findall(r'>(.*?)<\/h4>', resp.text)[0]
     size = findall(r'>(.*?)<\/td>', resp.text)[1]
     p_url = urlparse(url)
-    try:
-        js_query = rs.post(f"{p_url.scheme}://{p_url.hostname}/ajax.php?ajax=download", data={'id': str(url.split('/')[-1])}, headers={'x-requested-with': 'XMLHttpRequest'}).json()
-    except Exception as e:
-        raise DDLException(f'{e.__class__.__name__}')
-    if str(js_query['code']) == '200':
-        res = rs.get(f"{p_url.scheme}://{p_url.hostname}{js_query['file']}")
+    dlink = ''
+    if dtype != "DriveFire":
+        try:
+            js_query = rs.post(f"{p_url.scheme}://{p_url.hostname}/ajax.php?ajax=direct-download", data={'id': str(url.split('/')[-1])}, headers={'x-requested-with': 'XMLHttpRequest'}).json()
+            if str(js_query['code']) == '200':
+                dlink = f"{p_url.scheme}://{p_url.hostname}{js_query['file']}"
+        except Exception as e:
+            LOGGER.error(e)
+        
+    if not dlink and crypt:
+        rs.cookies.update({'crypt': crypt})
+        try:
+            js_query = rs.post(f"{p_url.scheme}://{p_url.hostname}/ajax.php?ajax=download", data={'id': str(url.split('/')[-1])}, headers={'x-requested-with': 'XMLHttpRequest'}).json()
+        except Exception as e:
+            raise DDLException(f'{e.__class__.__name__}')
+        if str(js_query['code']) == '200':
+            dlink = f"{p_url.scheme}://{p_url.hostname}{js_query['file']}"
+    
+    if dlink:    
+        res = rs.get(dlink)
         soup = BeautifulSoup(res.text, 'html.parser')
         gd_data = soup.select('a[class="btn btn-primary btn-user"]')
-        return f'''┎ <b>Name :</b> <i>{title}</i>
+        parse_txt = f'''┎ <b>Name :</b> <i>{title}</i>
 ┠ <b>Size :</b> <i>{size}</i>
 ┃ 
-┠ <b>HubDrive Link :</b> {url}
-┠ <b>Drive Link :</b> {gd_data[0]['href']}
+┠ <b>{dtype} Link :</b> {url}'''
+        if dtype == "HubDrive":
+            parse_txt += f'''┠ <b>Drive Link :</b> {gd_data[0]['href']}
 ┖ <b>Instant Link :</b> <a href="{gd_data[1]['href']}">Click Here</a>'''
+        else:
+            parse_txt += f"┖ <b>Drive Link :</b> {gd_data[0]['href']}"
+        return parse_txt
+    elif not dlink and not crypt:
+        raise DDLException(f'{dtype} Crypt Not Provided & {js_query["file"]}')
     else:
         raise DDLException(f'{js_query["file"]}')
-
-
+ 
+ 
 async def appflix(url):
     async def appflix_single(url):
         d_link = await sharer_scraper(url)
@@ -144,8 +161,8 @@ async def appflix(url):
         return f'''┎ <b>Name :</b> <i>{soup.title.string}</i>
 ┖ <b>Source Pack Link :</b> {url}{body}'''
     return await appflix_single(url)
-
-
+ 
+ 
 async def sharer_scraper(url):
     cget = create_scraper().request
     try:
@@ -167,7 +184,7 @@ async def sharer_scraper(url):
         'x-token': raw.hostname,
         'useragent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/7.0.548.0 Safari/534.10'
     }
-
+ 
     data = f'------WebKitFormBoundary{boundary}\r\nContent-Disposition: form-data; name="action"\r\n\r\ndirect\r\n' \
            f'------WebKitFormBoundary{boundary}\r\nContent-Disposition: form-data; name="key"\r\n\r\n{key}\r\n' \
            f'------WebKitFormBoundary{boundary}\r\nContent-Disposition: form-data; name="action_token"\r\n\r\n\r\n' \
@@ -188,6 +205,4 @@ async def sharer_scraper(url):
         return drive_link[0]
     else:
         raise DDLException('Drive Link not found, Try in your browser')
-
-
-
+ 
