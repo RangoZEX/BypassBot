@@ -1,7 +1,7 @@
 from time import time
 from re import match
 from sys import executable
-from os import execl as osexecl
+from os import execl
 from asyncio import create_task, gather, sleep as asleep, create_subprocess_exec
 from pyrogram.filters import command, private, user
 from pyrogram import Client, filters
@@ -74,9 +74,9 @@ async def bypass_check(client, message):
         txt = message.text
         entities = message.entities
     else:
-        return await message.reply('<i>No Link Provided!</i>')
+        return await message.reply('<i>No Link Provided! 🙂</i>', quote=True)
     
-    wait_msg = await message.reply("<i>Bypassing...</i>")
+    wait_msg = await message.reply("<i>Bypassing...</i>", quote=True)
     start = time()
  
     link, tlinks, no = '', [], 0
@@ -137,7 +137,7 @@ async def restart(client, message):
     await (await create_subprocess_exec('python3', 'update.py')).wait()
     with open(".restartmsg", "w") as f:
         f.write(f"{restart_message.chat.id}\n{restart_message.id}\n")
-    osexecl(executable, executable, "-m", "FZBypassBot")
+    execl(executable, executable, "-m", "FZBypass")
  
  
 @Bypass.on_inline_query()
@@ -145,7 +145,6 @@ async def inline_query(client, query):
     answers = [] 
     string = query.query.lower()
     if string.startswith("!bp "):
-        await asleep(4)
         link = string.strip('!bp ')
         start = time()
         try:
@@ -185,7 +184,7 @@ async def inline_query(client, query):
         answers.append(InlineQueryResultArticle(
                 title="♻️ Bypass Usage: In Line",
                 input_message_content=InputTextMessageContent(
-                    '''<b><i>FZ Bypass Bot!</i></b>
+                    '''<b><i>Bypass Bot!</i></b>
     
     <i>A Powerful Elegant Multi Threaded Bot written in Python... which can Bypass Various Shortener Links, Scrape links, and More ... </i>
     
@@ -193,7 +192,7 @@ async def inline_query(client, query):
                 ),
                 description="Bypass via !bp [link]",
                 reply_markup=InlineKeyboardMarkup([
-                        [InlineKeyboardButton("FZ Channel", url="https://t.me/FXTorrentz"),
+                        [InlineKeyboardButton("Channel", url="https://t.me/MirrorPro"),
                         InlineKeyboardButton('Try Bypass', switch_inline_query_current_chat="!bp ")]
                 ])
             ))
