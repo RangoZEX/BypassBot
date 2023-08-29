@@ -23,7 +23,7 @@ START_TEXT = """**Hey {},**
  ✳️ which can Bypass Various Shortener Links, Scrape links, and more.
  
 
- <b>Bot Started {bot_start_time} ago...</b>
+ <b>Bot Started {} ago...</b>
  """
 
 
@@ -37,11 +37,9 @@ async def start_msg(c, m):
         rango = await m.reply("<b>Processing..</b> ⏳", quote=True)
     else:
         rango = m.message
-    
-    bot_start_time = convert_time(time() - BOT_START)  # Calculate the bot's start time
-    
+        
     await rango.edit(
-         text=START_TEXT.format(mention=mention, bot_start_time=bot_start_time),  # Use bot_start_time here
+         text=START_TEXT.format(mention=mention, convert_time(time() - BOT_START))
          reply_markup=InlineKeyboardMarkup(
              [
                  [
